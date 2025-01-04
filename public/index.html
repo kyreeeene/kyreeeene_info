@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mereo Kyren's portfolio site">
+    <title>Mereo Kyren</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #633800;
+            background: linear-gradient(120deg, #e7d3b8, #e7e0d8);
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            color: #633800;
+            padding: 1.5rem 0;
+            text-align: center;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://pbs.twimg.com/profile_banners/3245915119/1735996747/1500x500') no-repeat center center/cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2rem;
+            font-weight: bold;
+            color: #633800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: "Noto Sans JP", sans-serif;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav ul li {
+            display: inline;
+            background: transparent;
+            box-shadow: 0 0 0 transparent;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #603a00;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .section {
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        h2 {
+            color: #c17000;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        ul li img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+        .project-item {
+            display: flex;
+        }
+        .project-item {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 1.5rem 0;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-item div {
+            padding: 1rem 1rem 1rem;
+        }
+
+        .project-item img {
+            width: 300px;
+            height: 100%;
+            max-height: 220px;;
+            object-fit: cover;
+        }
+
+        .project h3 {
+            margin-top: 0;
+            color: #c17000;
+        }
+
+        .project a {
+            text-decoration: none;
+            color: #c17000;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .project a:hover {
+            color: #333;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .about-section img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-section img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-section div {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .textgrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .textgrid-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            place-items: center;
+            min-height: 50px;
+            transition: transform 0.3s;
+        }
+
+        .textgrid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-item h3 {
+            margin: 1rem 0 0.5rem;
+            color: #c17000;
+            font-size: 1.5rem;
+        }
+
+        .gallery-item p {
+            padding: 0 1rem 1rem;
+            color: #666;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-links div {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+
+        .social-links i {
+            font-size: 24px;
+            color: #c17000;
+        }
+
+        .social-links a {
+            font-size: 18px;
+            color: #ec8a00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+            color: #a05d00;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            color: #633800;
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Mereo Kyren Portfolio</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#photograph">Photograph</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Engineer Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container about-section">
+                <div>
+                    <img src="https://pbs.twimg.com/profile_images/1875528596032516104/_ofB1ZiL_400x400.jpg" alt="Profile Icon">
+                    <h2>About Me</h2>
+                    <p>
+                        こんにちは。高専出身の社会人です。コーヒーと海鮮が好きです。<br>
+                        <br>
+                        普段はソフト屋さんとして、ディープラーニング関連のお仕事をしています。<br>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="photograph" class="section">
+            <div class="container">
+                <h2>Photograph</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:mwt37mwzehznrhfueae3l6vl/bafkreievvij3v4ehkk25r2tnjf62olqnnxqqoufln2ddulmybnpjtf57ue@jpeg" alt="mochimaru-san">
+                        <h3>もちまるさんのコーヒー</h3>
+                        <p>お気に入りのコーヒーです♪</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://pbs.twimg.com/media/Gf36g_sb0AA7HE7?format=jpg&name=large" alt="hiroshima-ko">
+                        <h3>広島港の景色</h3>
+                        <p>地元広島の広島港の近くの公園にて撮影。</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:mwt37mwzehznrhfueae3l6vl/bafkreiclnc32f2hl7xxd7tg37iu3vrn5cp3ped5dvpnjfmbidog5ey6ism@jpeg" alt="sorosushi">
+                        <h3>そろ寿司のイベント</h3>
+                        <p>大阪への旅行に行ったときに偶然重なったそろ寿司のイベントに参加しました♪</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="project">
+                    <h2>Projects</h2>
+                    <div class="project-item" style="display: none;">
+                        <img src="https://pbs.twimg.com/media/Gf36g_sb0AA7HE7?format=jpg&name=large" alt="Project 1">
+                        <div>
+                            <h3>プロジェクト名1</h3>
+                            <p>このプロジェクトでは、このプロジェクトでは、このプロジェクトでは、</p>
+                            <a href="#" target="_blank">詳細を見る</a>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://pbs.twimg.com/profile_images/1602496949990854657/Ayas6Upf_400x400.jpg" alt="Project 1">
+                        <div>
+                            <h3>めいにゃ / Maynya (イラスト)</h3>
+                            <p>不定期でイラストをPixivに上げています。</p>
+                            <a href="https://www.pixiv.net/users/15446495" target="_blank">詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2>Engineer Skills</h2>
+                Edge+DNN がメインのスキルで、他にあると便利なスキルを拡充していく方針をとっています。キャッチアップは早い方です。
+                <div class="textgrid">
+                    <div class="textgrid-item">開発基礎 (Git, VSCode DevContainer)</div>
+                    <div class="textgrid-item">CI/CD (Gitlab, Gitlab Runner)</div>
+                    <div class="textgrid-item">コンテナ (Docker, Docker Compose, Podman, Kubernetes)</div>
+                    <div class="textgrid-item">Python基礎 (Numpy, Pytorch, Holoviews, ...etc)</div>
+                    <div class="textgrid-item">DNN基礎 (NAS, Quantization, Pruning, MLOps, Annotation Tools)</div>
+                    <div class="textgrid-item">HW Optimization (SIMD, MemoryOpt)</div>
+                    <div class="textgrid-item">GPGPU (CUDA, OPENCL)</div>
+                    <div class="textgrid-item">クラウドプラットフォーム (AWS)</div>
+                    <div class="textgrid-item">DNN学習応用 (学習時勾配解析, 新規タスク開発, 教示設計, 学習時変形)</div>
+                    <div class="textgrid-item">DNN推論応用 (混合精度量子化, 実行時間推定, 構造最適化)</div>
+                    <div class="textgrid-item">Edge (Jetson, ARM, MIPI Camera, etc)</div>
+                    <div class="textgrid-item">C++基礎 (CMake, vcpkg, C++17+)</div>
+                    <div class="textgrid-item">... and more</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact</h2>
+                <p>よろしければフォローをお願いします。</p>
+                <div class="textgrid social-links">
+                    <div class="textgrid-item">
+                        <i class="fab fa-x-twitter"></i>
+                        <a href="https://x.com/kyreeeene" target="_blank">@kyreeeene</a>
+                    </div>
+                    <div class="textgrid-item">
+                        <i class="fa-brands fa-bluesky"></i>
+                        <a href="https://bsky.app/kyreeeene.bsky.social" target="_blank">@kyreeeene.bsky.social</a>
+                    </div>
+                    <div class="textgrid-item">
+                        <i class="fa-brands fa-github"></i>
+                        <a href="https://github.com/kyreeeene" target="_blank">@kyreeeene</a>
+                    </div>
+                    <div class="textgrid-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:kyreeeene+kyren@gmail.com">kyreeeene+kyren@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mereo Kyren. All rights
