@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="kei — private">
+    <title>kei · Private</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="kei · Private">
+    <meta property="og:description" content="写真 · 夜景 · コーヒー · 海鮮">
+    <meta property="og:url" content="https://kyreeeene.github.io/kyreeeene_info/private/">
+    <meta property="og:image" content="https://kyreeeene.github.io/kyreeeene_info/images/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@kyreeeene">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-1: #e7d3b8;
+            --bg-2: #e7e0d8;
+            --card: rgba(255, 255, 255, 0.78);
+            --card-solid: #fffaf2;
+            --text: #4a2a00;
+            --text-soft: #7a5018;
+            --accent: #c17000;
+            --accent-strong: #a05d00;
+            --border: rgba(99, 56, 0, 0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: linear-gradient(120deg, var(--bg-1), var(--bg-2));
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.4rem 2rem;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .nav .brand {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            font-size: 1rem;
+        }
+        .nav .brand small {
+            color: var(--accent);
+            font-weight: 500;
+            margin-left: 0.4em;
+            font-size: 0.85rem;
+        }
+        .nav .links {
+            display: flex;
+            gap: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+        }
+        .nav .links a {
+            color: var(--text-soft);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .nav .links a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem 2rem;
+        }
+
+        .section { margin-bottom: 5rem; }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-grid .avatar-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+        }
+        .about-grid .avatar-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(193, 112, 0, 0.18), transparent 70%);
+            filter: blur(20px);
+            z-index: 0;
+        }
+        .about-grid img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 14px 40px rgba(99, 56, 0, 0.18);
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+        .about-grid img:hover { transform: scale(1.05) rotate(-2deg); }
+        .about-grid .greeting {
+            font-size: clamp(1.6rem, 3.3vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        .about-grid p {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 700px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .about-grid .avatar-wrap { width: 200px; margin: 0 auto; }
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.85rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 1rem 1.2rem;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+        .contact-item:hover {
+            background: var(--text);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        .contact-item i {
+            color: var(--accent);
+            font-size: 1.15rem;
+            transition: color 0.3s ease;
+        }
+        .contact-item:hover i { color: #fff; }
+        .contact-item span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.84rem;
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-soft);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            border-top: 1px solid var(--border);
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            margin-left: 0.4em;
+        }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="../" class="brand">kei <small>/ private</small></a>
+        <div class="links">
+            <a href="../">← home</a>
+            <a href="../engineer/">engineer →</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="section">
+            <span class="eyebrow">// about</span>
+            <div class="about-grid">
+                <div class="avatar-wrap">
+                    <img src="../images/profile_image.jpg" alt="Profile" onerror="this.src='https://kyreeeene.github.io/kyreeeene_info/images/profile_image.jpg'">
+                </div>
+                <div>
+                    <p class="greeting">ケチョこと圭です。</p>
+                    <p>コーヒーと海鮮が好きなエンジニア。</p>
+                    <p>休日は街や夜景の写真を撮りに歩いています。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="eyebrow">// photograph</span>
+            <h2>Photograph</h2>
+            <!-- Instagram feed via Behold (behold.so) — single source: @kecho_koto_kei -->
+            <!-- TODO: behold.so のダッシュボードで発行された feed-id に置き換える -->
+            <behold-widget feed-id="K5weYdRzrcZzey2MSLV0"></behold-widget>
+        </section>
+
+        <section class="section">
+            <span class="eyebrow">// contact</span>
+            <h2>Contact</h2>
+            <div class="contact-grid">
+                <a class="contact-item" href="https://www.instagram.com/kecho_koto_kei/" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-instagram"></i><span>@kecho_koto_kei</span>
+                </a>
+                <a class="contact-item" href="https://x.com/kyreeeene" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-x-twitter"></i><span>@kyreeeene</span>
+                </a>
+                <a class="contact-item" href="https://bsky.app/profile/kyreeeene.bsky.social" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-bluesky"></i><span>kyreeeene.bsky</span>
+                </a>
+                <a class="contact-item" href="mailto:kyreeeene+kei@gmail.com">
+                    <i class="fa-solid fa-envelope"></i><span>email</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 kei ·
+        <a href="../engineer/">→ engineer side</a>
+    </footer>
+
+    <!-- Behold widget loader — ダッシュボードの埋め込みコードと src が違う場合は合わせる -->
+    <script src="https://w.behold.so/widget.js" type="module"></script>
+</body>
+
+</html>

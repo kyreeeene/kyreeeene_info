@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kyren — ML compiler engineer">
+    <title>Kyren · Engineer</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kyren · Engineer">
+    <meta property="og:description" content="Kyren — ML compiler engineer">
+    <meta property="og:url" content="https://kyreeeene.github.io/kyreeeene_info/engineer/">
+    <meta property="og:image" content="https://kyreeeene.github.io/kyreeeene_info/images/profile_image.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@kyreeeene">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --card: #13141a;
+            --border: #25262e;
+            --border-hi: #3a3b46;
+            --text: #e6e6e8;
+            --muted: #8a8a93;
+            --accent: #7dd3fc;
+            --accent-dim: #4a8db1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 15% 0%, rgba(125,211,252,0.05), transparent 45%),
+                radial-gradient(circle at 85% 100%, rgba(125,211,252,0.03), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.4rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10,10,12,0.7);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .nav .brand { color: var(--text); text-decoration: none; }
+        .nav .brand .accent { color: var(--accent); }
+        .nav .brand .slash { color: var(--muted); }
+        .nav .links { display: flex; gap: 1.5rem; }
+        .nav .links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .nav .links a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+        }
+
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(150px, auto);
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.85rem;
+            transition: border-color 0.35s ease, transform 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { border-color: var(--border-hi); }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(125,211,252,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* About */
+        .card.about { grid-column: span 4; grid-row: span 2; }
+        .card.about h1 {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+        .card.about h1 .accent { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+        .card.about p {
+            color: var(--muted);
+            font-size: 0.98rem;
+            margin-bottom: 0.6rem;
+            max-width: 56ch;
+        }
+        .card.about .stats {
+            margin-top: 1.6rem;
+            display: flex;
+            gap: 1.6rem;
+            flex-wrap: wrap;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .card.about .stats span::before {
+            content: "▸ ";
+            color: var(--accent);
+        }
+
+        /* Profile */
+        .card.profile { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; }
+        .card.profile .avatar {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .card.profile .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.15) contrast(1.05) brightness(0.95);
+            transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card.profile:hover .avatar img {
+            filter: grayscale(0) contrast(1.05) brightness(1);
+            transform: scale(1.04);
+        }
+        .card.profile .handle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+        .card.profile .status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card.profile .status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Skills */
+        .card.skills { grid-column: span 6; }
+        .card.skills .lead {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.4rem;
+            max-width: 70ch;
+        }
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.7rem;
+        }
+        .skill-chip {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+            cursor: default;
+        }
+        .skill-chip:hover {
+            border-color: var(--accent-dim);
+            background: rgba(125,211,252,0.04);
+            transform: translateY(-2px);
+        }
+        .skill-chip .name {
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: block;
+        }
+        .skill-chip .tags {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin-top: 0.4rem;
+            display: block;
+            letter-spacing: 0.02em;
+        }
+
+        /* Now / focus */
+        .card.focus { grid-column: span 3; }
+        .card.focus h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card.focus p { color: var(--muted); font-size: 0.92rem; }
+
+        /* Contact */
+        .card.contact { grid-column: span 3; }
+        .card.contact .links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.55rem;
+            margin-top: 0.2rem;
+        }
+        .card.contact a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.7rem 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            text-decoration: none;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+        .card.contact a:hover {
+            border-color: var(--accent-dim);
+            color: var(--accent);
+            background: rgba(125,211,252,0.04);
+        }
+        .card.contact i { font-size: 1rem; color: var(--muted); transition: color 0.2s; }
+        .card.contact a:hover i { color: var(--accent); }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            margin-left: 0.5em;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            .bento { grid-template-columns: repeat(2, 1fr); }
+            .card.about { grid-column: span 2; grid-row: auto; }
+            .card.profile { grid-column: span 2; grid-row: auto; }
+            .card.profile .avatar { aspect-ratio: 16/9; }
+            .card.skills, .card.focus, .card.contact { grid-column: span 2; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 1.25rem 1rem 2rem; }
+            .nav { padding: 1rem 1.25rem; }
+            .bento { grid-template-columns: 1fr; gap: 0.85rem; }
+            .card { padding: 1.4rem; }
+            .card.about, .card.profile, .card.skills, .card.focus, .card.contact { grid-column: span 1; }
+            .card.contact .links { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="../" class="brand"><span class="accent">$</span> kyren <span class="slash">/ engineer</span></a>
+        <div class="links">
+            <a href="../">← home</a>
+            <a href="../private/">private →</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="bento">
+            <section class="card about">
+                <span class="label">// about</span>
+                <h1>Hi, I'm <span class="accent">kyren</span>.<br>ML compiler engineer.</h1>
+                <p>高専出身のソフトウェアエンジニア。Edgeデバイス上でのDNN最適化を専門にしています — 精度・速度の両立、量子化、推論実装まで。</p>
+                <p>最近はAIコンパイラ周りに関わることが多めです。</p>
+                <div class="stats">
+                    <span>based in Japan</span>
+                    <span>C++ / Python</span>
+                    <span>open to chat</span>
+                </div>
+            </section>
+
+            <section class="card profile">
+                <div class="avatar">
+                    <img src="../images/profile_image.jpg" alt="Profile" onerror="this.src='https://kyreeeene.github.io/kyreeeene_info/images/profile_image.jpg'">
+                </div>
+                <div class="handle">@kyreeeene</div>
+                <div class="status">available · 2026</div>
+            </section>
+
+            <section class="card skills">
+                <span class="label">// engineer skills</span>
+                <p class="lead">Edgeデバイス上でのDNN最適化（精度 &amp;&amp; 速度）・量子化・実装が専門領域です。</p>
+                <div class="skill-grid">
+                    <div class="skill-chip">
+                        <span class="name">Edge AI Optimization</span>
+                        <span class="tags">Jetson · ARM · SIMD · memory</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">Model Compression &amp; Quantization</span>
+                        <span class="tags">mixed precision · pruning · NAS</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">Inference Runtime Optimization</span>
+                        <span class="tags">TensorRT · profiling</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">Compiler &amp; Kernel Optimization</span>
+                        <span class="tags">CUDA · kernel tuning</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">DNN Training Engineering</span>
+                        <span class="tags">gradient analysis · task design · MLOps</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">Embedded Deployment</span>
+                        <span class="tags">ARM Linux · MIPI camera</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">C++ / Python Production</span>
+                        <span class="tags">production grade</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="name">CI/CD &amp; Containerization</span>
+                        <span class="tags">GitLab · Docker</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card focus">
+                <span class="label">// currently</span>
+                <h3>AIコンパイラ最適化</h3>
+                <p>カーネルレベルの最適化・推論ランタイム周辺に時間を使っています。</p>
+            </section>
+
+            <section class="card contact">
+                <span class="label">// contact</span>
+                <div class="links">
+                    <a href="https://github.com/kyreeeene" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github</a>
+                    <a href="https://x.com/kyreeeene" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> x / twitter</a>
+                    <a href="https://zenn.dev/kyreeeene" target="_blank" rel="noopener"><i class="fa-solid fa-z"></i> zenn</a>
+                    <a href="mailto:kyreeeene+kyren@gmail.com"><i class="fa-solid fa-envelope"></i> email</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        © 2026 kyren ·
+        <a href="../private/">→ private side</a>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('pointermove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+            });
+        });
+    </script>
+</body>
+
+</html>

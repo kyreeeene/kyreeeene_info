@@ -4,489 +4,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kyren">
+    <meta name="description" content="Kyren — engineer & private">
     <title>Kyren</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kyren">
+    <meta property="og:description" content="Kyren — engineer & private">
+    <meta property="og:url" content="https://kyreeeene.github.io/kyreeeene_info/">
+    <meta property="og:image" content="https://kyreeeene.github.io/kyreeeene_info/images/profile_image.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@kyreeeene">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: #633800;
-            background: linear-gradient(120deg, #e7d3b8, #e7e0d8);
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; }
+        body { font-family: 'Inter', sans-serif; }
+
+        .entry {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            color: #633800;
-            padding: 1.5rem 0;
-            text-align: center;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .pane {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .entry:hover .pane { flex: 0.85; }
+        .entry .pane:hover { flex: 1.3; }
+
+        .pane .corner {
+            position: absolute;
+            top: 1.6rem;
+            left: 1.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
         }
 
-        header::before {
+        .pane .title {
+            font-size: clamp(3rem, 9vw, 6.5rem);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pane:hover .title { transform: translateY(-6px); }
+
+        .pane .subtitle {
+            margin-top: 1.4rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            opacity: 0.85;
+        }
+
+        .pane .enter {
+            position: absolute;
+            bottom: 2.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .pane:hover .enter { opacity: 1; transform: translateY(0); }
+
+        /* engineer side */
+        .pane.engineer {
+            background: #0a0a0c;
+            color: #e6e6e8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .pane.engineer::before {
             content: "";
             position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(125,211,252,0.08), transparent 55%),
+                radial-gradient(circle at 70% 80%, rgba(125,211,252,0.04), transparent 55%);
+            transition: opacity 0.7s ease;
+            pointer-events: none;
+        }
+        .pane.engineer:hover::before { opacity: 1.2; }
+        .pane.engineer .corner { color: #7dd3fc; }
+        .pane.engineer .title { font-weight: 500; }
+        .pane.engineer .subtitle { color: #8a8a93; }
+        .pane.engineer .enter { color: #7dd3fc; }
+
+        /* private side */
+        .pane.private {
+            background: linear-gradient(120deg, #e7d3b8, #e7e0d8);
+            color: #4a2a00;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .pane.private::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 40%, rgba(193,112,0,0.10), transparent 55%);
+            pointer-events: none;
+        }
+        .pane.private .corner { color: #a05d00; }
+        .pane.private .title { font-weight: 700; color: #4a2a00; }
+        .pane.private .subtitle { color: #8a5a18; }
+        .pane.private .enter { color: #a05d00; }
+
+        /* divider */
+        .entry::after {
+            content: "";
+            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://pbs.twimg.com/profile_banners/3245915119/1735996747/1500x500') no-repeat center center/cover;
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3.2rem;
-            font-weight: bold;
-            color: #633800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-family: "Noto Sans JP", sans-serif;
-        }
-        nav .menu-toggle {
-            display: none;
-        }
-        nav ul {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            justify-content: center;
-        }
-
-        nav ul li a {
-            color: #333;
-            text-decoration: none;
-        }
-        nav ul li {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        nav ul li:hover {
-            background: #603a00;
-            transform: scale(1.05);
-        }
-        nav ul li:hover a {
-            color: #fff;
-            transform: scale(1.05);
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: rgba(255,255,255,0.06);
+            pointer-events: none;
+            z-index: 1;
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                position: absolute;
-                top: 50px;
-                right: 20px;
-                background-color: #444;
-                padding: 10px;
-                border-radius: 8px;
-
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
-                visibility: hidden;
-                transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            html, body { overflow: auto; }
+            .entry { flex-direction: column; height: auto; }
+            .pane { min-height: 50vh; padding: 4rem 1.5rem; }
+            .entry:hover .pane,
+            .entry .pane:hover { flex: 1; }
+            .pane .enter { opacity: 1; transform: translateY(0); }
+            .entry::after {
+                left: 0; right: 0; top: 50%; bottom: auto;
+                width: 100%; height: 1px;
             }
-
-            nav .menu-toggle {
-                display: block;
-            }
-
-            nav.active ul {
-                max-height: 500px;
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        .section {
-            padding: 3rem 1rem;
-        }
-
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 1200px;
-        }
-
-        h2 {
-            color: #c17000;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 0.5rem 0;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-        }
-
-        ul li img {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            border-radius: 50%;
-        }
-
-        .project {
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-item {
-            display: flex;
-            background: rgba(255, 255, 255, 0.9);
-            margin: 1.5rem 0;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .project-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-item div {
-            padding: 1rem 1rem 1rem 1rem;
-        }
-
-        .project-item img {
-            width: 300px;
-            height: 100%;
-            max-height: 220px;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .project-item {
-                display: block;
-            }
-            .project-item img {
-                width: 100%;
-                height: 200px;
-                max-height: 220px;
-                object-fit: cover;
-            }
-        }
-
-        .project h3 {
-            margin-top: 0;
-            color: #c17000;
-        }
-
-        .project a {
-            text-decoration: none;
-            color: #c17000;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .project a:hover {
-            color: #333;
-        }
-
-        .about-section {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .about-section img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .about-section img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .about-section div {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .textgrid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .textgrid-item {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            place-items: center;
-            min-height: 50px;
-            transition: transform 0.3s;
-        }
-
-        .textgrid-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .gallery-item h3 {
-            margin: 1rem 0 0.5rem;
-            color: #c17000;
-            font-size: 1.5rem;
-        }
-
-        .gallery-item p {
-            padding: 0 1rem 1rem;
-            color: #666;
-        }
-
-        .social-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .social-links div {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0;
-        }
-
-        .social-links i {
-            font-size: 24px;
-            color: #c17000;
-        }
-
-        .social-links a {
-            font-size: 18px;
-            color: #ec8a00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .social-links a:hover {
-            text-decoration: underline;
-            color: #a05d00;
-        }
-
-        footer {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            color: #633800;
-            text-align: center;
-            padding: 1.5rem 0;
-            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>Kyren</h1>
-            <nav>
-                <span class="menu-toggle">&#9776;</span>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#photograph">Photograph</a></li>
-                    <li style="display: none;"><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Engineer Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="about" class="section">
-            <div class="container about-section">
-                <div>
-                    <img src="https://kyreeeene.github.io/kyreeeene_info/images/profile_image.jpg" alt="Profile Icon">
-                    <h2>About Me</h2>
-                    <p>
-                        こんにちは。高専出身のエンジニア職です。コーヒーと海鮮が好きです<br>
-                        <br>
-                        普段はソフト屋さんとして、AI関連のお仕事をしています<br>
-                        最近はAIコンパイラが多め
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="photograph" class="section">
-            <div class="container">
-                <h2>Photograph</h2>
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:mwt37mwzehznrhfueae3l6vl/bafkreievvij3v4ehkk25r2tnjf62olqnnxqqoufln2ddulmybnpjtf57ue@jpeg" alt="mochimaru-san">
-                        <h3>もちまるさんのコーヒー</h3>
-                        <p>
-                            お気に入りのコーヒー<br>
-                            インドネシアの豆とエチオピアの豆が特に好き
-                        </p>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://pbs.twimg.com/media/Gf36g_sb0AA7HE7?format=jpg&name=large" alt="hiroshima-ko">
-                        <h3>広島港の景色</h3>
-                        <p>
-                            広島港近くの公園にて撮影<br>
-                            雨上がりで拡散したライトと夕焼けの空がお気に入り
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section" style="display: none;">
-            <div class="container">
-                <div class="project">
-                    <h2>Projects</h2>
-                    <div class="project-item" style="display: none;">
-                        <img src="https://pbs.twimg.com/media/Gf36g_sb0AA7HE7?format=jpg&name=large" alt="Project 1">
-                        <div>
-                            <h3>プロジェクト名1</h3>
-                            <p>このプロジェクトでは、このプロジェクトでは、このプロジェクトでは、</p>
-                            <a href="#" target="_blank">詳細を見る</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section">
-            <div class="container">
-                <h2>Engineer Skills</h2>
-                Edgeデバイス上でのDNN最適化(精度&&速度)・量子化・実装を専門としています
-                <div class="textgrid">
-                    <div class="textgrid-item" title="Jetson, ARM, SIMD, Memory Optimization">
-                        Edge AI Optimization
-                    </div>
-                    <div class="textgrid-item" title="Mixed Precision, Pruning, NAS">
-                        Model Compression & Quantization
-                    </div>
-                    <div class="textgrid-item" title="TensorRT, Profiling">
-                        Inference Runtime Optimization
-                    </div>
-                    <div class="textgrid-item" title="CUDA, Kernel Tuning">
-                        Compiler & Kernel Level Optimization
-                    </div>
-                    <div class="textgrid-item" title="Gradient Analysis, Task Design, MLOps">
-                        DNN Training Engineering
-                    </div>
-                    <div class="textgrid-item" title="ARM Linux, MIPI Camera Integration">
-                        Embedded Deployment
-                    </div>
-                    <div class="textgrid-item" title="">
-                        C++ / Python Production Development
-                    </div>
-                    <div class="textgrid-item" title="GitLab, Docker">
-                        CI/CD & Containerization
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <div class="container">
-                <h2>Contact</h2>
-                <p>よろしければフォローをお願いします</p>
-                <div class="textgrid social-links">
-                    <div class="textgrid-item">
-                        <i class="fab fa-x-twitter"></i>
-                        <a href="https://x.com/kyreeeene" target="_blank">@kyreeeene</a>
-                    </div>
-                    <div class="textgrid-item">
-                        <i class="fa-brands fa-z"></i>
-                        <a href="https://zenn.dev/kyreeeene" target="_blank">@kyreeeene</a>
-                    </div>
-                    <div class="textgrid-item">
-                        <i class="fa-brands fa-github"></i>
-                        <a href="https://github.com/kyreeeene" target="_blank">@kyreeeene</a>
-                    </div>
-                    <div class="textgrid-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <a href="mailto:kyreeeene+kyren@gmail.com">kyreeeene+kyren@gmail.com</a>
-                    </div>
-                    <div class="textgrid-item">
-                        <i class="fa-brands fa-bluesky"></i>
-                        <a href="https://bsky.app/kyreeeene.bsky.social" target="_blank">@kyreeeene.bsky.social</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Kyren. All rights</p>
-        </div>
-    </footer>
-
-    <script>
-        document.querySelector('.menu-toggle').addEventListener('click', () => {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('active');
-        });
-    </script>
+    <div class="entry">
+        <a href="./engineer/" class="pane engineer">
+            <span class="corner">// kyren · engineer</span>
+            <span class="title">Engineer</span>
+            <span class="subtitle">ML compiler · edge AI · C++ / Python</span>
+            <span class="enter">enter →</span>
+        </a>
+        <a href="./private/" class="pane private">
+            <span class="corner">kei · private</span>
+            <span class="title">Private</span>
+            <span class="subtitle">写真 · 夜景 · コーヒー · 海鮮</span>
+            <span class="enter">enter →</span>
+        </a>
+    </div>
 </body>
+
+</html>
